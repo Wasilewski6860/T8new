@@ -1,52 +1,35 @@
 package ru.vsu.baryshev;
 
-import java.util.Scanner;
-import ru.vsu.baryshev.InputArgs;
-import ru.vsu.baryshev.util.ArrayUtils;
+import java.util.Locale;
 
-import javax.swing.*;
 
 public class Main {
-    public static boolean check() {
-        Scanner in = new Scanner(System.in);
-        int check2 = in.nextInt();
-        boolean check;
-        if (check2 == 1) {
-            check = true;
-        } else check = false;
-
-        return check;
-    }
-
-
-
 
     public static void main(String[] args) {
-//        System.out.println("Would you like to enter the array manually?");
-//        boolean check1 = check();
-//        InputArgs p = InputArgs.parseCmdArgs(args, check1);
-//        if (check1 == true) {
-//            double[][] array = InputArgs.strToArr(p.strArr);
-//            array = logic.solution(array);
-//            InputArgs.printOfArray(array);
-//        } else {
-//            java.awt.EventQueue.invokeLater(new Runnable() {
-//
-//                @Override
-//                public void run() {
-//                    new FrameMain().setVisible(true);
-//                }
-//            });
-//
-//        }
+        Locale.setDefault(Locale.ENGLISH);       //testOfReading1.txt  testOfWriting1.txt
+
+    if(args.length>0){
+
+        InputArgs p = InputArgs.parseCmdArgs(args);
+        double[][] array = InputArgs.strToArr(p.strArr);
+        if(array==null){
+            System.out.println("Wrong input format, do in like 1,2,3-4,5,7");
+            return;
+        }
+        array = logic.solution(array);
+        InputArgs.printOfArray(array);
+
+    } else {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             @Override
             public void run() {
                 new FrameMain().setVisible(true);
             }
-        }) ;
+        });
 
+   }
 
     }
 }

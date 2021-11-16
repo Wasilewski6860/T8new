@@ -1,0 +1,2 @@
+0-0
+.\\testOfReading2.txt .\\testOfWriting2.txt

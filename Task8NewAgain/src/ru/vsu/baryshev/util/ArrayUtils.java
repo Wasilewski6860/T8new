@@ -510,7 +510,7 @@ public class ArrayUtils {
         }
     }
 
-    public static double[][] readDoubleArray2FromFile(String fileName) {
+    public static double[][] readDoubleArray2FromFile(String fileName) throws FileNotFoundException  {
         try {
             return toDoubleArray2(readLinesFromFile(fileName));
         }

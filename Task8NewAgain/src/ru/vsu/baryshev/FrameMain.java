@@ -7,6 +7,7 @@ import ru.vsu.baryshev.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -22,8 +23,12 @@ public class FrameMain extends JFrame {
     private JButton записьВФайлButton;
     private JTextField pathOfWriting;
     private JButton обработкаButton;
+    private JTextField Errors;
+    private JButton ReadFromDirectory;
+    private JButton WriteToFoleDirectory;
 
     public FrameMain(){
+
         this.setTitle("ТАбличка");
         this.setContentPane(panelMain);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,14 +37,35 @@ public class FrameMain extends JFrame {
         прочестьИзФайлаButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String path = pathOfReading.getText();
-                double [][]array = ArrayUtils.readDoubleArray2FromFile(path);
-                JTableUtils.writeArrayToJTable(table1,array);
+
+
+               try {
+                   double [][]array = ArrayUtils.readDoubleArray2FromFile(path);
+                   JTableUtils.writeArrayToJTable(table1,array);
+
+               }catch (FileNotFoundException ex){
+                   Errors.setText("Wrong path of reading ");
+                   return;
+               }
+
+
             }
         });
+        ReadFromDirectory.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+        });
+
         записьВФайлButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String path = pathOfWriting.getText();
                 double[][] arr = WorkWithJT.writeJTtoArray(table1);
 
@@ -55,9 +81,11 @@ public class FrameMain extends JFrame {
         обработкаButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 double [][]array = WorkWithJT.writeJTtoArray(table1);
-                // array = logic.solution(array);
-               // JTableUtils.writeArrayToJTable(table1,array);
+                 array = logic.solution(array);
+                JTableUtils.writeArrayToJTable(table1,array);
+
             }
         });
 
